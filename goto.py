@@ -2,8 +2,8 @@
 import os
 import argparse
 import subprocess
+from subprocess import Popen
 import string
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", "--folder", help="Choose folder to open", type=str)
@@ -30,16 +30,27 @@ def locate_folder(folder):
 	print folder
 	proc = subprocess.Popen(["locate " + folder], stdout=subprocess.PIPE, shell=True)
 	folder_path = (out, err) = proc.communicate()
-	print folder_path
 	folder_path = str(folder_path)
 	folder_path = folder_path.split()
 	folder_path = folder_path[0]
-	folder_path = string.split(folder_path[0], '\n')
+	folder_path = folder_path.strip("('")
+	folder_path = folder_path.split("\\n")
+	folder_path = folder_path[0]
+	folder_path = folder_path.split('/')
+	print folder_path
+	for x in range(0, 3):
+		folder_path.remove(folder_path[0])
+	folder_path = '/'.join(folder_path)
+	print folder_path
 	print '\n'
-	print folder_path[0]
+	path = folder_path
+	print path
+	print '\n'
+	path = 'cd ' + path
+	cd(path)
 	
 
 def main(args):
 	check_args(args)
 	locate_folder(args.folder)
-main(args)
+
