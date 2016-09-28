@@ -13,18 +13,25 @@ parser.add_argument("-e", "--editor", help="Choose an editor, vim, gedit", type=
 args = parser.parse_args()
 
 def check_args(args):
+	bool folder = false
+	bool doc = false
+	bool editor = false
 	if args.folder:
 		print "Folder Specified: " + args.folder
+		folder = true;
 	else:
 		print "No Folder Specified"
 	if args.document:
 		print "Document Specified: " + args.document
+		doc = true;
 	else:
 		print "No Document Specified"
 	if args.editor:
 		print "Editor Specified: " + args.editor
+		editor = true;
 	else:
 		print "No Editor Specified"
+	return folder, doc, editor
 
 def locate_folder(folder):
 	print folder
@@ -46,11 +53,17 @@ def locate_folder(folder):
 	path = folder_path
 	print path
 	print '\n'
-	path = 'cd ' + path
-	cd(path)
-	
+	//GOTTA MAKE THAT CWD STAY IN CWD
+
+def choose_path(bool folder, doc, editor):
+	if folder == true:
+		locate_folder(args.folder)
+	if editor == true && doc == true:
+		open_doc(args.document, args.editor)
+	else if doc == true:
+		open_doc(args.document, 'vim')
 
 def main(args):
-	check_args(args)
-	locate_folder(args.folder)
+	choose_path(bool folder, doc, editor) = check_args(args)
 
+main(args)
