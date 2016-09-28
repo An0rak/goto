@@ -33,27 +33,35 @@ def check_args(args):
 		print "No Editor Specified"
 	return folder, doc, editor
 
-def locate_folder(folder):
-	print folder
-	proc = subprocess.Popen(["locate " + folder], stdout=subprocess.PIPE, shell=True)
-	folder_path = (out, err) = proc.communicate()
-	folder_path = str(folder_path)
-	folder_path = folder_path.split()
-	folder_path = folder_path[0]
-	folder_path = folder_path.strip("('")
-	folder_path = folder_path.split("\\n")
-	folder_path = folder_path[0]
-	folder_path = folder_path.split('/')
-	print folder_path
+def get_and_format_path(dir):
+	proc = subprocess.Popen(["locate " + dir], stdout=subprocess.PIPE, shell=True)
+	dir_path = (out, err) = proc.communicate()
+	dir_path = str(dir_path)
+	dir_path = dir_path.split()
+	dir_path = dir_path[0]
+	dir_path = dir_path.strip("('")
+	dir_path = dir_path.split("\\n")
+	dir_path = dir_path[0]
+	dir_path = dir_path.split('/')
+	print dir_path
 	for x in range(0, 3):
-		folder_path.remove(folder_path[0])
-	folder_path = '/'.join(folder_path)
-	print folder_path
+		dir_path.remove(dir_path[0])
+	dir_path = '/'.join(dir_path)
+	print dir_path
 	print '\n'
-	path = folder_path
+	path = dir_path
 	print path
 	print '\n'
-	//GOTTA MAKE THAT CWD STAY IN CWD
+	return path
+
+def locate_folder(folder):
+	print folder
+	path = get_and_format_path(folder)
+	#GOTTA MAKE THAT CWD STAY IN CWD
+
+def open_doc(doc, editor):
+	path = get_and_format_path(doc)
+	os.system(editor + ' ' + path)
 
 def choose_path(bool folder, doc, editor):
 	if folder == true:
