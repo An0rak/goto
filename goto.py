@@ -13,9 +13,9 @@ parser.add_argument("-e", "--editor", help="Choose an editor, vim, gedit", type=
 args = parser.parse_args()
 
 def check_args(args):
-	bool folder = false
-	bool doc = false
-	bool editor = false
+	folder = false
+	doc = false
+	editor = false
 	if args.folder:
 		print "Folder Specified: " + args.folder
 		folder = true;
