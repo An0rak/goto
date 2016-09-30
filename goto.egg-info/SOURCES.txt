@@ -1,0 +1,9 @@
+setup.py
+goto/__init__.py
+goto/__main__.py
+goto/goto.py
+goto.egg-info/PKG-INFO
+goto.egg-info/SOURCES.txt
+goto.egg-info/dependency_links.txt
+goto.egg-info/entry_points.txt
+goto.egg-info/top_level.txt

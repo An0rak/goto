@@ -10,7 +10,7 @@ from setuptools import setup
 
 version = re.search(
     '^__version__\s*=\s*"(.*)"',
-    open('goto-commandline-tool/goto.py').read(),
+    open('goto/goto.py').read(),
     re.M
     ).group(1)
 
@@ -21,9 +21,9 @@ with open("README.md", "rb") as f:
 
 setup(
     name = "goto",
-    packages = ["goto-commandline-tool"],
+    packages = ["goto"],
     entry_points = {
-        "console_scripts": ['goto = goto-commandline-tool.goto:main']
+        "console_scripts": ['goto=goto.goto:main']
         },
     version = version,
     description = "Python command line application bare bones template.",
